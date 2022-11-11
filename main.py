@@ -5,7 +5,7 @@ supported_shapes = ["square", "circle", "rectangle", "parallelogram"]
 def circle_dimensions():
     invalid = True
     while invalid:
-        dimension_provided = input("Are you provided a radius or circumference? ")
+        dimension_provided = input("Are you provided a radius or circumference? \n")
         if dimension_provided == "diameter":
             invalid = False
         elif dimension_provided == "radius":
@@ -17,7 +17,7 @@ def circle_dimensions():
     invalid = True
     while invalid:
         try:
-            dimension = float(input("What is the {} of the circle? ".format(dimension_provided)))
+            dimension = float(input("What is the {} of the circle? \n".format(dimension_provided)))
             invalid = False
         except ValueError:
             print("Please input a number")
@@ -34,7 +34,7 @@ def square_dimensions():
     invalid = True
     while invalid:
         try:
-            side = float(input("What is a side dimension? "))
+            side = float(input("What is a side dimension? \n"))
             invalid = False
         except ValueError:
             print("Please input a number")
@@ -72,11 +72,8 @@ def parallelogram_dimensions():
 
 
 while True:
-    shape_request = input("What shape dimensions of the following: {}".format(supported_shapes))
-    if shape_request not in supported_shapes:  # if/many elif to take the input and direct the program/user in the right direction
-        print("Invalid shape")
-        continue
-    elif shape_request == "circle":
+    shape_request = input("What shape dimensions need solving of the following: {}. Type 'exit' to exit the program. \n".format(supported_shapes))
+    if shape_request == "circle":  # if/many elif to take the input and direct the program/user in the right direction
         circle_dimensions()
     elif shape_request == "square":
         square_dimensions()
@@ -84,3 +81,7 @@ while True:
         rectangle_dimensions()
     elif shape_request == "parallelogram":
         parallelogram_dimensions()
+    elif shape_request == "exit":
+        exit("Manual program exit")
+    else:
+        print("Invalid shape")
