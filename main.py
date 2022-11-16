@@ -12,6 +12,7 @@ def try_except(question):  # a function for try/except statements considering th
             print("Please input a number")
     return answer  # this is the most useful function ever
 
+
 def circle_dimensions():
     invalid = True
     while invalid:
@@ -61,13 +62,33 @@ def triangle_dimensions():
     side_count = int(try_except("How many sides are provided?\n"))  # try_except returns a float, for loops do not like floats, so it is converted into an integer.
     if side_count > 3:
         print("Triangle cannot have >3 sides, that shape is not a triangle.")
-        pass
     for i in range(side_count):
         side = try_except("What is the dimension of a side? \n")
         sides.append(side)
-    if side_count >= 2:
+    if side_count == 3:
         area = sides[0] * sides[1] * 0.5  # (1/2) base * height, but really just half the area of a square.
-    print("triangle area: {:.2}".format(area))
+        perimeter = sides[0] + sides[1] + sides[2]
+    if side_count == 2:
+        unknown = input("What side is unaccounted for? hypotenuse, opposite or adjacent?")  # this is to adjust pythagoras formula as needed
+        if unknown == "hypotenuse":
+            hypotenuse = m.sqrt(sides[0] ** 2 + sides[1] ** 2)
+            sides.append(hypotenuse)
+        elif unknown == "opposite" or "adjacent":  # to know which side is the longest; the hypotenuse
+            if sides[0] > sides[1]:
+                hypotenuse = sides[0]  # if sides[0] is larger, it has to be the hypotenuse
+                other = sides[1]
+            else:
+                hypotenuse = sides[1]  # if sides[0] is not larger, sides[1] is the hypotenuse
+                other = sides[0]
+
+            moment = m.sqrt(hypotenuse ** 2 - other ** 2)
+            area = moment * other * 0.5  # area of triangle cannot use hypotenuse
+            sides.append(moment)
+        else:
+            print("Please input 'hypotenuse', 'opposite', 'adjacent'.")
+        # area = sides[0] * sides[1] * 0.5  # (1/2) base * height, but really just half the area of a square.
+        perimeter = sides[0] + sides[1] + sides[2]
+    print("triangle area: {:.2f}, perimeter {:.2f}".format(area, perimeter))
 
 
 while True:
