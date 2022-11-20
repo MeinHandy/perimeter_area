@@ -88,7 +88,7 @@ def triangle_dimensions():
                 if sides[0] > sides[1]:
                     hypotenuse = sides[0]  # if sides[0] is larger, it has to be the hypotenuse
                     other = sides[1]
-                elif sides[1] > sides[0]:
+                elif sides[1] > sides   [0]:
                     hypotenuse = sides[1]  # if sides[0] is not larger, sides[1] is the hypotenuse; double checks
                     other = sides[0]
                 else:
