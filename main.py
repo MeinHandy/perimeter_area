@@ -88,6 +88,16 @@ def triangle_dimensions():
         perimeter = hypotenuse + side_b + side_a
         print("perimeter", perimeter, ". area", area)
 
+    elif method == 1:  # requires use of SOHCAHTOA rules
+        angle = float(try_except("What is the angle given? (degrees)"))
+        known = input("Which side is known? (hypotenuse/opposite/adjacent)")
+        if known == "adjacent":
+            adjacent = float(try_except("What is the dimension of the adjacent?"))
+            opposite = adjacent * m.tan(m.radians(angle))
+            hypotenuse = m.sqrt(opposite ** 2 + adjacent ** 2)  # 2 sides are known, pythagoras to find last
+            area = 0.5 * adjacent * opposite
+            perimeter = adjacent + opposite + hypotenuse
+            print("Area is {:.2f}, perimeter is {:.2f}".format(area, perimeter))
 
 
 while True:  # loops the program until intentional exit
