@@ -98,7 +98,22 @@ def triangle_dimensions():
             area = 0.5 * adjacent * opposite
             perimeter = adjacent + opposite + hypotenuse
             print("Area is {:.2f}, perimeter is {:.2f}".format(area, perimeter))
-
+        elif known == "opposite":
+            opposite = float(try_except("What is the dimension of the opposite?"))
+            hypotenuse = opposite / m.sin(m.radians(angle))  # calculates hyp
+            adjacent = m.sqrt(hypotenuse ** 2 - opposite ** 2)  # calculates adj using hyp and opp using pythagoras
+            area = 0.5 * adjacent * opposite
+            perimeter = adjacent + opposite + hypotenuse
+            print("Area is {:.2f}, perimeter is {:.2f}".format(area, perimeter))
+        elif known == "hypotenuse":
+            hypotenuse = float(try_except("What is the dimension of the hypotenuse?"))
+            opposite = hypotenuse * m.sin(m.radians(angle))
+            adjacent = m.sqrt(hypotenuse ** 2 - opposite ** 2)  # calculates adj using hyp and opp using pythagoras
+            area = 0.5 * adjacent * opposite
+            perimeter = adjacent + opposite + hypotenuse
+            print("Area is {:.2f}, perimeter is {:.2f}".format(area, perimeter))
+        else:
+            print("error")
 
 while True:  # loops the program until intentional exit
     shape_request = input("What shape dimensions need solving of the following: {}. Type 'exit' to exit the program. \n".format(supported_shapes)).strip().lower()
