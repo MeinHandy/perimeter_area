@@ -35,8 +35,8 @@ def circle_dimensions(dictionary):
     area = m.pi * radius ** 2
     circumference = m.pi * (2 * radius)
     print("Circle area: {:.2f}, circle circumference: {:.2f} (2 decimal places)".format(area, circumference))
-    dictionary["Area"].append(area)
-    dictionary["Perimeter"].append(circumference)
+    dictionary["Area"].append(round(area, 2))
+    dictionary["Perimeter"].append(round(circumference, 2))
 
 
 def square_dimensions(dictionary):
@@ -44,8 +44,8 @@ def square_dimensions(dictionary):
     area = side ** 2
     perimeter = side * 4
     print("Square area: {:.2f}, Square perimeter: {:.2f} (2 decimal places)".format(area, perimeter))
-    dictionary["Area"].append(area)
-    dictionary["Perimeter"].append(perimeter)
+    dictionary["Area"].append(round(area, 2))
+    dictionary["Perimeter"].append(round(perimeter, 2))
 
 def rectangle_dimensions(dictionary):
     side0 = try_except("What is the first side dimension?\n")
@@ -53,8 +53,8 @@ def rectangle_dimensions(dictionary):
     area = side0 * side1
     perimeter = side0 * 2 + side1 * 2
     print("Rectangle area: {:.2f}, Rectangle perimeter: {:.2f} (2 decimal places)".format(area, perimeter))
-    dictionary["Area"].append(area)
-    dictionary["Perimeter"].append(perimeter)
+    dictionary["Area"].append(round(area, 2))
+    dictionary["Perimeter"].append(round(perimeter, 2))
 
 def parallelogram_dimensions(dictionary):  # parallelogram is just a rectangle with attitude
     side0 = try_except("What is the first side dimension?\n")
@@ -62,8 +62,8 @@ def parallelogram_dimensions(dictionary):  # parallelogram is just a rectangle w
     area = side0 * side1
     perimeter = side0 * 2 + side1 * 2
     print("parallelogram area: {:.2f}, parallelogram perimeter: {:.2f} (2 decimal places)".format(area, perimeter))
-    dictionary["Area"].append(area)
-    dictionary["Perimeter"].append(perimeter)
+    dictionary["Area"].append(round(area, 2))
+    dictionary["Perimeter"].append(round(perimeter, 2))
 
 def triangle_dimensions(dictionary):
     method = int(try_except("How many dimension(s) are known?\n"))
@@ -74,8 +74,9 @@ def triangle_dimensions(dictionary):
         area = 0.5 * side_b * side_a
         perimeter = hypotenuse + side_b + side_a
         print("perimeter", perimeter, ". area", area)
-        dictionary["Area"].append(area)
-        dictionary["Perimeter"].append(perimeter)
+        dictionary["Area"].append(round(area, 2))
+        dictionary["Perimeter"].append(round(perimeter, 2))
+
     elif method == 2:  # pythagoras required
         invalid = True
         while invalid:
@@ -97,8 +98,8 @@ def triangle_dimensions(dictionary):
         area = 0.5 * side_a * side_b
         perimeter = hypotenuse + side_b + side_a
         print("Area is {:.2f}, perimeter is {:.2f}".format(area, perimeter))
-        dictionary["Area"].append(area)
-        dictionary["Perimeter"].append(perimeter)
+        dictionary["Area"].append(round(area, 2))
+        dictionary["Perimeter"].append(round(perimeter, 2))
 
     elif method == 1:  # requires use of SOHCAHTOA rules and/or pythagoras
         angle = float(try_except("What is the angle given? (degrees)\n"))
@@ -112,8 +113,8 @@ def triangle_dimensions(dictionary):
             area = 0.5 * adjacent * opposite
             perimeter = adjacent + opposite + hypotenuse
             print("Area is {:.2f}, perimeter is {:.2f}".format(area, perimeter))
-            dictionary["Area"].append(area)
-            dictionary["Perimeter"].append(perimeter)
+            dictionary["Area"].append(round(area, 2))
+            dictionary["Perimeter"].append(round(perimeter, 2))
         elif known == "opposite":
             opposite = float(try_except("What is the dimension of the opposite?\n"))
             hypotenuse = opposite / m.sin(m.radians(angle))  # calculates hyp
@@ -123,8 +124,8 @@ def triangle_dimensions(dictionary):
             area = 0.5 * adjacent * opposite
             perimeter = adjacent + opposite + hypotenuse
             print("Area is {:.2f}, perimeter is {:.2f}".format(area, perimeter))
-            dictionary["Area"].append(area)
-            dictionary["Perimeter"].append(perimeter)
+            dictionary["Area"].append(round(area, 2))
+            dictionary["Perimeter"].append(round(perimeter, 2))
         elif known == "hypotenuse":
             hypotenuse = float(try_except("What is the dimension of the hypotenuse?\n"))
             opposite = hypotenuse * m.sin(m.radians(angle))
@@ -134,8 +135,8 @@ def triangle_dimensions(dictionary):
             area = 0.5 * adjacent * opposite
             perimeter = adjacent + opposite + hypotenuse
             print("Area is {:.2f}, perimeter is {:.2f}".format(area, perimeter))
-            dictionary["Area"].append(area)
-            dictionary["Perimeter"].append(perimeter)
+            dictionary["Area"].append(round(area, 2))
+            dictionary["Perimeter"].append(round(perimeter, 2))
         else:
             print("error")
 
@@ -161,7 +162,6 @@ while True:  # loops the program until intentional exit
         output = pd.DataFrame(dictionary)
         output["Area"].round(2)
         output["Perimeter"].round(2)
-
         output.to_csv("history.csv")
         exit("Manual program exit")
     else:
