@@ -37,6 +37,7 @@ def circle_dimensions(dictionary):
     print("Area: {:.2f}, Circumference: {:.2f} (2 decimal places)".format(area, circumference))
     dictionary["Area"].append(round(area, 2))
     dictionary["Perimeter"].append(round(circumference, 2))
+    dictionary["Shape"].append("Circle")
 
 
 def square_dimensions(dictionary):
@@ -46,6 +47,7 @@ def square_dimensions(dictionary):
     print("Area: {:.2f}, Perimeter: {:.2f} (2 decimal places)".format(area, perimeter))
     dictionary["Area"].append(round(area, 2))
     dictionary["Perimeter"].append(round(perimeter, 2))
+    dictionary["Shape"].append("Square")
 
 def rectangle_dimensions(dictionary):
     side0 = try_except("What is the first side dimension?\n")
@@ -55,6 +57,7 @@ def rectangle_dimensions(dictionary):
     print("Area: {:.2f}, Perimeter: {:.2f} (2 decimal places)".format(area, perimeter))
     dictionary["Area"].append(round(area, 2))
     dictionary["Perimeter"].append(round(perimeter, 2))
+    dictionary["Shape"].append("Rectangle")
 
 def parallelogram_dimensions(dictionary):  # parallelogram is just a rectangle with attitude
     side0 = try_except("What is the first side dimension?\n")
@@ -64,9 +67,10 @@ def parallelogram_dimensions(dictionary):  # parallelogram is just a rectangle w
     print("parallelogram area: {:.2f}, parallelogram perimeter: {:.2f} (2 decimal places)".format(area, perimeter))
     dictionary["Area"].append(round(area, 2))
     dictionary["Perimeter"].append(round(perimeter, 2))
+    dictionary["Shape"].append("Parallelogram")
 
 def triangle_dimensions(dictionary):
-    method = int(try_except("How many dimension(s) are known?\n"))  # turns the try_except to
+    method = int(try_except("How many dimension(s) are known?\n"))
     if method == 3:  # no advanced triangle calculations needed
         hypotenuse = try_except("What is the dimension of the hypotenuse?\n")  # hypotenuse is unique and must be identified specifically
         side_a = try_except("What is the dimension of side A?\n")  # side_a and side_b are interchangeable in the current context
@@ -76,6 +80,7 @@ def triangle_dimensions(dictionary):
         print("Area is {:.2f}, perimeter is {:.2f}".format(area, perimeter))
         dictionary["Area"].append(round(area, 2))
         dictionary["Perimeter"].append(round(perimeter, 2))
+        dictionary["Shape"].append("Triangle")
 
     elif method == 2:  # pythagoras required
         invalid = True
@@ -98,8 +103,9 @@ def triangle_dimensions(dictionary):
         print("Area is {:.2f}, perimeter is {:.2f}".format(area, perimeter))
         dictionary["Area"].append(round(area, 2))
         dictionary["Perimeter"].append(round(perimeter, 2))
+        dictionary["Shape"].append("Triangle")
 
-    elif method == 1:  # requires use of SOHCAHTOA rules and/or pythagoras
+    elif method == 1:  # requires use of SOHCAHTOA rules can also use pythagoras in some cases
         angle = try_except("What is the angle given? (degrees)\n")
         known = input("Which side is known? (hypotenuse/opposite/adjacent)\n").lower().strip()
 
@@ -112,6 +118,7 @@ def triangle_dimensions(dictionary):
             print("Area is {:.2f}, perimeter is {:.2f}".format(area, perimeter))
             dictionary["Area"].append(round(area, 2))
             dictionary["Perimeter"].append(round(perimeter, 2))
+            dictionary["Shape"].append("Triangle")
 
         elif known == "opposite":
             opposite = try_except("What is the dimension of the opposite?\n")
@@ -122,6 +129,7 @@ def triangle_dimensions(dictionary):
             print("Area is {:.2f}, perimeter is {:.2f}".format(area, perimeter))
             dictionary["Area"].append(round(area, 2))
             dictionary["Perimeter"].append(round(perimeter, 2))
+            dictionary["Shape"].append("Triangle")
 
         elif known == "hypotenuse":
             hypotenuse = try_except("What is the dimension of the hypotenuse?\n")
@@ -132,33 +140,29 @@ def triangle_dimensions(dictionary):
             print("Area is {:.2f}, perimeter is {:.2f}".format(area, perimeter))
             dictionary["Area"].append(round(area, 2))
             dictionary["Perimeter"].append(round(perimeter, 2))
+            dictionary["Shape"].append("Triangle")
+
         else:
             print("Error, please choose between hypotenuse/opposite/adjacent")
     else:
         print("Error, a triangle can only have a maximum of 3 sides.")
 
+
 while True:  # loops the program until intentional exit
-    shape_request = input("What shape dimensions need solving of the following: {}. Type 'exit' to save and exit the program. \n".format(supported_shapes)).strip().lower()
+    shape_request = input("What shape dimensions need solving of the following: {}. \nType 'exit' to save and exit the program. \n".format(supported_shapes)).strip().lower()
     if shape_request == "circle":  # if/many elif to take the input and direct the program/user in the right direction
-        dictionary["Shape"].append(shape_request)
         circle_dimensions(dictionary)
     elif shape_request == "square":
-        dictionary["Shape"].append(shape_request)
         square_dimensions(dictionary)
     elif shape_request == "rectangle":
-        dictionary["Shape"].append(shape_request)
         rectangle_dimensions(dictionary)
     elif shape_request == "parallelogram":
-        dictionary["Shape"].append(shape_request)
         parallelogram_dimensions(dictionary)
     elif shape_request == "triangle":
-        dictionary["Shape"].append(shape_request)
         triangle_dimensions(dictionary)
     elif shape_request == "exit":
-        output = pd.DataFrame(dictionary)
-        output["Area"]
-        output["Perimeter"]
-        output.to_csv("history.csv")
-        exit("Manual program exit")
+        output = pd.DataFrame(dictionary)  # saves dictionary to output
+        output.to_csv("history.csv")  # outputs to history.csv locally into the programs folder
+        exit("Manual program exit")  # stops the program
     else:
         print("Invalid shape")
